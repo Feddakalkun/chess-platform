@@ -693,3 +693,52 @@ socket.on('disconnect', () => {
 socket.on('connect_error', (err) => {
     console.log('Connection error:', err);
 });
+
+// ===== CHAT SYSTEM =====
+const chatForm = document.getElementById('chatForm');
+const chatInput = document.getElementById('chatInput');
+const chatMessages = document.getElementById('chatMessages');
+
+if (chatForm) {
+    chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const msg = chatInput.value.trim();
+        if (msg) {
+            // Get name safely
+            let name = 'Anonymous';
+            const nameCreate = document.getElementById('playerNameCreate');
+            const nameJoin = document.getElementById('playerNameJoin');
+            if (nameCreate && nameCreate.value) name = nameCreate.value;
+            else if (nameJoin && nameJoin.value) name = nameJoin.value;
+
+            socket.emit('chatMessage', {
+                gameId: currentGame,
+                playerName: name,
+                message: msg
+            });
+            chatInput.value = '';
+        }
+    });
+}
+
+socket.on('chatMessage', (data) => {
+    const div = document.createElement('div');
+    div.className = 'chat-msg';
+
+    // Check if it's a system message or user
+    if (data.sender === 'System') div.classList.add('chat-system-msg');
+
+    // Construct message HTML
+    const nameSpan = data.sender !== 'System' ? `<strong>${escapeHtml(data.sender)}:</strong> ` : '';
+    div.innerHTML = `${nameSpan}${escapeHtml(data.text)}`;
+
+    if (chatMessages) {
+        chatMessages.appendChild(div);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+});
+
+function escapeHtml(text) {
+    if (!text) return text;
+    return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
