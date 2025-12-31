@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Chess Platform - Play Chess960 & More</title>
+    <meta name="description" content="Play chess online with friends. Features Chess960, multiple time controls, and beautiful modern interface.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Main Menu Screen -->
+    <div id="menuScreen" class="screen active">
+        <div class="menu-container">
+            <div class="glass-card title-card">
+                <h1 class="title">
+                    <span class="title-icon">♔</span>
+                    Advanced Chess
+                    <span class="title-icon">♚</span>
+                </h1>
+                <p class="subtitle">Experience chess like never before</p>
+            </div>
+            
+            <div class="glass-card main-menu">
+                <button class="menu-btn primary-btn" id="createGameBtn">
+                    <span class="btn-icon">➕</span>
+                    Create New Game
+                </button>
+                
+                <button class="menu-btn secondary-btn" id="joinGameBtn">
+                    <span class="btn-icon">🔗</span>
+                    Join Game
+                </button>
+                
+                <button class="menu-btn secondary-btn" id="aboutBtn">
+                    <span class="btn-icon">ℹ️</span>
+                    About
+                </button>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">♟️</div>
+                    <div class="feature-title">Multiple Variants</div>
+                    <div class="feature-desc">Classical, Chess960 & more</div>
+                </div>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">⏱️</div>
+                    <div class="feature-title">Time Controls</div>
+                    <div class="feature-desc">Bullet, Blitz, Rapid, Classical</div>
+                </div>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">🌐</div>
+                    <div class="feature-title">Online Play</div>
+                    <div class="feature-desc">Real-time with friends</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Create Game Screen -->
+    <div id="createGameScreen" class="screen">
+        <div class="config-container">
+            <div class="glass-card config-card">
+                <div class="config-header">
+                    <button class="back-btn" id="backToMenu1">← Back</button>
+                    <h2>Create New Game</h2>
+                </div>
+                
+                <div class="config-section">
+                    <label class="config-label">Your Name</label>
+                    <input type="text" id="playerNameCreate" class="config-input" placeholder="Enter your name" value="Player 1">
+                </div>
+                
+                <div class="config-section">
+                    <label class="config-label">Chess Variant</label>
+                    <div class="variant-selector">
+                        <button class="variant-btn active" data-variant="standard">
+                            <div class="variant-icon">♔</div>
+                            <div class="variant-name">Classical</div>
+                            <div class="variant-desc">Traditional chess</div>
+                        </button>
+                        <button class="variant-btn" data-variant="chess960">
+                            <div class="variant-icon">🎲</div>
+                            <div class="variant-name">Chess960</div>
+                            <div class="variant-desc">Fischer Random</div>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="config-section chess960-options" style="display: none;">
+                    <label class="config-label">
+                        Chess960 Position
+                        <span class="label-hint">(0-959, or random)</span>
+                    </label>
+                    <div class="position-input-group">
+                        <input type="number" id="chess960Position" class="config-input" min="0" max="959" placeholder="Random">
+                        <button class="randomize-btn" id="randomizePosition">🎲 Random</button>
+                    </div>
+                </div>
+                
+                <div class="config-section">
+                    <label class="config-label">Time Control</label>
+                    <div class="time-control-grid">
+                        <button class="time-btn" data-time="60" data-increment="0">
+                            <div class="time-name">Bullet</div>
+                            <div class="time-value">1+0</div>
+                        </button>
+                        <button class="time-btn active" data-time="300" data-increment="0">
+                            <div class="time-name">Blitz</div>
+                            <div class="time-value">5+0</div>
+                        </button>
+                        <button class="time-btn" data-time="600" data-increment="0">
+                            <div class="time-name">Rapid</div>
+                            <div class="time-value">10+0</div>
+                        </button>
+                        <button class="time-btn" data-time="1800" data-increment="0">
+                            <div class="time-name">Classical</div>
+                            <div class="time-value">30+0</div>
+                        </button>
+                        <button class="time-btn" data-time="300" data-increment="3">
+                            <div class="time-name">Blitz+</div>
+                            <div class="time-value">5+3</div>
+                        </button>
+                        <button class="time-btn" data-time="custom">
+                            <div class="time-name">Custom</div>
+                            <div class="time-value">⚙️</div>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="config-section custom-time-options" style="display: none;">
+                    <div class="custom-time-grid">
+                        <div>
+                            <label class="config-label">Minutes</label>
+                            <input type="number" id="customMinutes" class="config-input" min="1" max="90" value="5">
+                        </div>
+                        <div>
+                            <label class="config-label">Increment (sec)</label>
+                            <input type="number" id="customIncrement" class="config-input" min="0" max="60" value="0">
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="create-btn" id="confirmCreateGame">
+                    Create Game & Get Room Code
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Join Game Screen -->
+    <div id="joinGameScreen" class="screen">
+        <div class="config-container">
+            <div class="glass-card config-card">
+                <div class="config-header">
+                    <button class="back-btn" id="backToMenu2">← Back</button>
+                    <h2>Join Game</h2>
+                </div>
+                
+                <div class="config-section">
+                    <label class="config-label">Your Name</label>
+                    <input type="text" id="playerNameJoin" class="config-input" placeholder="Enter your name" value="Player 2">
+                </div>
+                
+                <div class="config-section">
+                    <label class="config-label">Room Code</label>
+                    <input type="text" id="roomCode" class="config-input" placeholder="Enter room code" style="font-family: 'Courier New', monospace; font-size: 1.2rem;">
+                </div>
+                
+                <button class="create-btn" id="confirmJoinGame">
+                    Join Game
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Waiting Screen -->
+    <div id="waitingScreen" class="screen">
+        <div class="waiting-container">
+            <div class="glass-card waiting-card">
+                <div class="waiting-header">
+                    <h2>Waiting for Opponent...</h2>
+                </div>
+                
+                <div class="room-code-display">
+                    <div class="room-code-label">Share this Room Code:</div>
+                    <div class="room-code-box" id="displayRoomCode">
+                        <span id="roomCodeText">XXXX-XXXX</span>
+                        <button class="copy-btn" id="copyRoomCode" title="Copy to clipboard">📋</button>
+                    </div>
+                </div>
+                
+                <div class="game-info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Variant</div>
+                        <div class="info-value" id="waitingVariant">Classical</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Time Control</div>
+                        <div class="info-value" id="waitingTime">5+0</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Your Color</div>
+                        <div class="info-value" id="waitingColor">White</div>
+                    </div>
+                </div>
+                
+                <div class="loading-animation">
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                </div>
+                
+                <button class="secondary-btn cancel-btn" id="cancelWaiting">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Game Screen -->
+    <div id="gameScreen" class="screen">
+        <div class="game-layout">
+            <!-- Left Sidebar -->
+            <div class="game-sidebar left-sidebar glass-card">
+                <div class="game-info">
+                    <h3 class="sidebar-title">Game Info</h3>
+                    <div class="info-grid">
+                        <div class="info-row">
+                            <span class="info-key">Variant:</span>
+                            <span class="info-val" id="gameVariant">Classical</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-key">Time:</span>
+                            <span class="info-val" id="gameTimeControl">5+0</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-key">You:</span>
+                            <span class="info-val" id="yourColor">White</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="move-history">
+                    <h3 class="sidebar-title">Moves</h3>
+                    <div class="moves-list" id="movesList"></div>
+                </div>
+                
+                <div class="game-actions">
+                    <button class="action-btn" id="offerDrawBtn">
+                        <span class="btn-icon">🤝</span>
+                        Offer Draw
+                    </button>
+                    <button class="action-btn resign-btn" id="resignBtn">
+                        <span class="btn-icon">🏳️</span>
+                        Resign
+                    </button>
+                    <button class="action-btn" id="exportPGNBtn">
+                        <span class="btn-icon">📥</span>
+                        Export PGN
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Center Board Area -->
+            <div class="board-container">
+                <!-- Opponent Info -->
+                <div class="player-info opponent-info glass-card">
+                    <div class="player-avatar">👤</div>
+                    <div class="player-details">
+                        <div class="player-name" id="opponentName">Opponent</div>
+                        <div class="player-pieces" id="opponentCaptured"></div>
+                    </div>
+                    <div class="player-clock" id="opponentClock">5:00</div>
+                </div>
+                
+                <!-- Chess Board -->
+                <div class="chessboard-wrapper">
+                    <div class="chessboard" id="chessboard"></div>
+                </div>
+                
+                <!-- Your Info -->
+                <div class="player-info your-info glass-card">
+                    <div class="player-avatar">👤</div>
+                    <div class="player-details">
+                        <div class="player-name" id="yourName">You</div>
+                        <div class="player-pieces" id="yourCaptured"></div>
+                    </div>
+                    <div class="player-clock" id="yourClock">5:00</div>
+                </div>
+            </div>
+            
+            <!-- Right Sidebar -->
+            <div class="game-sidebar right-sidebar glass-card">
+                <div class="board-controls">
+                    <h3 class="sidebar-title">Board Theme</h3>
+                    <div class="theme-selector">
+                        <button class="theme-btn active" data-theme="classic">Classic</button>
+                        <button class="theme-btn" data-theme="modern">Modern</button>
+                        <button class="theme-btn" data-theme="wood">Wood</button>
+                        <button class="theme-btn" data-theme="neon">Neon</button>
+                    </div>
+                </div>
+                
+                <div class="position-info">
+                    <h3 class="sidebar-title">Position</h3>
+                    <div class="fen-display">
+                        <label class="fen-label">FEN:</label>
+                        <textarea class="fen-text" id="fenDisplay" readonly></textarea>
+                        <button class="copy-fen-btn" id="copyFEN">Copy FEN</button>
+                    </div>
+                </div>
+                
+                <div class="game-status">
+                    <h3 class="sidebar-title">Status</h3>
+                    <div class="status-box" id="gameStatus">
+                        <div class="status-indicator"></div>
+                        <span>Your turn</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Game Over Modal -->
+    <div id="gameOverModal" class="modal">
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h2 id="gameOverTitle">Game Over</h2>
+            </div>
+            <div class="modal-body">
+                <div class="game-over-icon" id="gameOverIcon">👑</div>
+                <p class="game-over-message" id="gameOverMessage">Checkmate!</p>
+                <div class="game-over-details" id="gameOverDetails"></div>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn primary-btn" id="newGameBtn">New Game</button>
+                <button class="modal-btn secondary-btn" id="backToMenuBtn">Main Menu</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h2>About Advanced Chess</h2>
+                <button class="close-modal" id="closeAbout">×</button>
+            </div>
+            <div class="modal-body">
+                <p>A modern, feature-rich chess platform for playing with friends online.</p>
+                <h3>Features:</h3>
+                <ul class="feature-list">
+                    <li>♟️ <strong>Classical Chess</strong> - Traditional chess rules</li>
+                    <li>🎲 <strong>Chess960 (Fischer Random)</strong> - 960 possible starting positions</li>
+                    <li>⏱️ <strong>Multiple Time Controls</strong> - Bullet, Blitz, Rapid, Classical</li>
+                    <li>🌐 <strong>Real-time Multiplayer</strong> - Play online with friends</li>
+                    <li>🎨 <strong>Multiple Themes</strong> - Customize your board appearance</li>
+                    <li>📊 <strong>Move History & PGN Export</strong> - Review and save your games</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/1.0.0-beta.6/chess.min.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
