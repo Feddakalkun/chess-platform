@@ -89,7 +89,15 @@ const TIME_CONTROLS = {
 
 // Create new game
 function createGame(config) {
-    const gameId = uuidv4();
+    // Generate a simple 4-digit room code (1000-9999)
+    // This is much easier to share than a UUID!
+    let gameId = Math.floor(1000 + Math.random() * 9000).toString();
+
+    // Ensure uniqueness (extremely unlikely to collide with low traffic, but good practice)
+    while (games.has(gameId)) {
+        gameId = Math.floor(1000 + Math.random() * 9000).toString();
+    }
+
     let chess;
     let startPosition = null;
 

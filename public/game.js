@@ -67,8 +67,8 @@ function formatTime(ms) {
 }
 
 function formatGameId(gameId) {
-    // Format as XXXX-XXXX
-    return gameId.slice(0, 8).toUpperCase().replace(/(.{4})/, '$1-');
+    // Return ID as is (now it's a simple 4-digit code)
+    return gameId;
 }
 
 // ===== MENU NAVIGATION =====
