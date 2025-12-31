@@ -310,13 +310,15 @@
                     </div>
                 </div>
 
-                <div class="position-info">
-                    <h3 class="sidebar-title">Position</h3>
-                    <div class="fen-display">
-                        <label class="fen-label">FEN:</label>
-                        <textarea class="fen-text" id="fenDisplay" readonly></textarea>
-                        <button class="copy-fen-btn" id="copyFEN">Copy FEN</button>
+                <div class="chat-container glass-card">
+                    <h3 class="sidebar-title">Battle Chat</h3>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="chat-system-msg">Welcome to the arena.</div>
                     </div>
+                    <form class="chat-input-area" id="chatForm">
+                        <input type="text" id="chatInput" placeholder="Send a message..." autocomplete="off">
+                        <button type="submit" class="chat-send-btn">➤</button>
+                    </form>
                 </div>
 
                 <div class="game-status">

@@ -17,9 +17,9 @@
     --glass-shine: rgba(255, 255, 255, 0.05);
     --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
 
-    /* Board Colors (Translucent) */
-    --board-light: rgba(255, 255, 255, 0.15);
-    --board-dark: rgba(0, 0, 0, 0.3);
+    /* Board Colors (Translucent - VISIBLE) */
+    --board-light: rgba(255, 255, 255, 0.6);
+    --board-dark: rgba(0, 0, 0, 0.5);
 
     --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --radius-lg: 12px;
@@ -483,6 +483,81 @@ h3.sidebar-title {
     50% {
         opacity: 0.5;
     }
+}
+
+/* Chat System */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.chat-msg {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.chat-msg strong {
+    color: var(--accent-gold);
+    margin-right: 0.5rem;
+}
+
+.chat-system-msg {
+    color: var(--accent-purple);
+    font-size: 0.8rem;
+    font-style: italic;
+    text-align: center;
+    margin: 0.5rem 0;
+}
+
+.chat-input-area {
+    display: flex;
+    gap: 0.5rem;
+}
+
+#chatInput {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    padding: 0.5rem;
+    color: white;
+    font-family: inherit;
+}
+
+#chatInput:focus {
+    outline: none;
+    border-color: var(--accent-gold);
+}
+
+.chat-send-btn {
+    background: var(--accent-gold);
+    color: black;
+    border: none;
+    border-radius: 4px;
+    padding: 0 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.chat-send-btn:hover {
+    transform: scale(1.05);
 }
 
 /* Game Info Grid */

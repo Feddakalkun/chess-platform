@@ -324,6 +324,19 @@ io.on('connection', (socket) => {
         }
     });
 
+    // Chat Message
+    socket.on('chatMessage', (data) => {
+        const game = games.get(data.gameId);
+        if (game) {
+            // Broadcast to everyone in room (including sender, for simple local echo confirmation if needed, though usually we append locally)
+            io.to(game.id).emit('chatMessage', {
+                sender: data.playerName,
+                text: data.message,
+                timestamp: Date.now()
+            });
+        }
+    });
+
     // Accept draw
     socket.on('acceptDraw', (data) => {
         const game = games.get(data.gameId);
