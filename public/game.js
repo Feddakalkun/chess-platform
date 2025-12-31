@@ -201,7 +201,7 @@ document.getElementById('confirmCreateGame').addEventListener('click', () => {
 // ===== JOIN GAME =====
 document.getElementById('confirmJoinGame').addEventListener('click', () => {
     const playerName = document.getElementById('playerNameJoin').value.trim() || 'Player 2';
-    const roomCode = document.getElementById('roomCode').value.trim().replace(/-/g, '');
+    const roomCode = document.getElementById('roomCode').value.trim();
 
     if (!roomCode) {
         alert('Please enter a room code');
