@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advanced Chess Platform - Play Chess960 & More</title>
-    <meta name="description" content="Play chess online with friends. Features Chess960, multiple time controls, and beautiful modern interface.">
+    <meta name="description"
+        content="Play chess online with friends. Features Chess960, multiple time controls, and beautiful modern interface.">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <!-- Main Menu Screen -->
     <div id="menuScreen" class="screen active">
@@ -22,24 +25,24 @@
                 </h1>
                 <p class="subtitle">Experience chess like never before</p>
             </div>
-            
+
             <div class="glass-card main-menu">
                 <button class="menu-btn primary-btn" id="createGameBtn">
                     <span class="btn-icon">➕</span>
                     Create New Game
                 </button>
-                
+
                 <button class="menu-btn secondary-btn" id="joinGameBtn">
                     <span class="btn-icon">🔗</span>
                     Join Game
                 </button>
-                
+
                 <button class="menu-btn secondary-btn" id="aboutBtn">
                     <span class="btn-icon">ℹ️</span>
                     About
                 </button>
             </div>
-            
+
             <div class="features-grid">
                 <div class="feature-card glass-card">
                     <div class="feature-icon">♟️</div>
@@ -59,7 +62,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Create Game Screen -->
     <div id="createGameScreen" class="screen">
         <div class="config-container">
@@ -68,12 +71,13 @@
                     <button class="back-btn" id="backToMenu1">← Back</button>
                     <h2>Create New Game</h2>
                 </div>
-                
+
                 <div class="config-section">
                     <label class="config-label">Your Name</label>
-                    <input type="text" id="playerNameCreate" class="config-input" placeholder="Enter your name" value="Player 1">
+                    <input type="text" id="playerNameCreate" class="config-input" placeholder="Enter your name"
+                        value="Player 1">
                 </div>
-                
+
                 <div class="config-section">
                     <label class="config-label">Chess Variant</label>
                     <div class="variant-selector">
@@ -89,18 +93,19 @@
                         </button>
                     </div>
                 </div>
-                
+
                 <div class="config-section chess960-options" style="display: none;">
                     <label class="config-label">
                         Chess960 Position
                         <span class="label-hint">(0-959, or random)</span>
                     </label>
                     <div class="position-input-group">
-                        <input type="number" id="chess960Position" class="config-input" min="0" max="959" placeholder="Random">
+                        <input type="number" id="chess960Position" class="config-input" min="0" max="959"
+                            placeholder="Random">
                         <button class="randomize-btn" id="randomizePosition">🎲 Random</button>
                     </div>
                 </div>
-                
+
                 <div class="config-section">
                     <label class="config-label">Time Control</label>
                     <div class="time-control-grid">
@@ -130,7 +135,7 @@
                         </button>
                     </div>
                 </div>
-                
+
                 <div class="config-section custom-time-options" style="display: none;">
                     <div class="custom-time-grid">
                         <div>
@@ -143,14 +148,14 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <button class="create-btn" id="confirmCreateGame">
                     Create Game & Get Room Code
                 </button>
             </div>
         </div>
     </div>
-    
+
     <!-- Join Game Screen -->
     <div id="joinGameScreen" class="screen">
         <div class="config-container">
@@ -159,24 +164,26 @@
                     <button class="back-btn" id="backToMenu2">← Back</button>
                     <h2>Join Game</h2>
                 </div>
-                
+
                 <div class="config-section">
                     <label class="config-label">Your Name</label>
-                    <input type="text" id="playerNameJoin" class="config-input" placeholder="Enter your name" value="Player 2">
+                    <input type="text" id="playerNameJoin" class="config-input" placeholder="Enter your name"
+                        value="Player 2">
                 </div>
-                
+
                 <div class="config-section">
                     <label class="config-label">Room Code</label>
-                    <input type="text" id="roomCode" class="config-input" placeholder="Enter room code" style="font-family: 'Courier New', monospace; font-size: 1.2rem;">
+                    <input type="text" id="roomCode" class="config-input" placeholder="Enter room code"
+                        style="font-family: 'Courier New', monospace; font-size: 1.2rem;">
                 </div>
-                
+
                 <button class="create-btn" id="confirmJoinGame">
                     Join Game
                 </button>
             </div>
         </div>
     </div>
-    
+
     <!-- Waiting Screen -->
     <div id="waitingScreen" class="screen">
         <div class="waiting-container">
@@ -184,7 +191,7 @@
                 <div class="waiting-header">
                     <h2>Waiting for Opponent...</h2>
                 </div>
-                
+
                 <div class="room-code-display">
                     <div class="room-code-label">Share this Room Code:</div>
                     <div class="room-code-box" id="displayRoomCode">
@@ -192,7 +199,7 @@
                         <button class="copy-btn" id="copyRoomCode" title="Copy to clipboard">📋</button>
                     </div>
                 </div>
-                
+
                 <div class="game-info-grid">
                     <div class="info-item">
                         <div class="info-label">Variant</div>
@@ -207,18 +214,18 @@
                         <div class="info-value" id="waitingColor">White</div>
                     </div>
                 </div>
-                
+
                 <div class="loading-animation">
                     <div class="loading-dot"></div>
                     <div class="loading-dot"></div>
                     <div class="loading-dot"></div>
                 </div>
-                
+
                 <button class="secondary-btn cancel-btn" id="cancelWaiting">Cancel</button>
             </div>
         </div>
     </div>
-    
+
     <!-- Game Screen -->
     <div id="gameScreen" class="screen">
         <div class="game-layout">
@@ -241,12 +248,12 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="move-history">
                     <h3 class="sidebar-title">Moves</h3>
                     <div class="moves-list" id="movesList"></div>
                 </div>
-                
+
                 <div class="game-actions">
                     <button class="action-btn" id="offerDrawBtn">
                         <span class="btn-icon">🤝</span>
@@ -262,7 +269,7 @@
                     </button>
                 </div>
             </div>
-            
+
             <!-- Center Board Area -->
             <div class="board-container">
                 <!-- Opponent Info -->
@@ -274,12 +281,12 @@
                     </div>
                     <div class="player-clock" id="opponentClock">5:00</div>
                 </div>
-                
+
                 <!-- Chess Board -->
                 <div class="chessboard-wrapper">
                     <div class="chessboard" id="chessboard"></div>
                 </div>
-                
+
                 <!-- Your Info -->
                 <div class="player-info your-info glass-card">
                     <div class="player-avatar">👤</div>
@@ -290,7 +297,7 @@
                     <div class="player-clock" id="yourClock">5:00</div>
                 </div>
             </div>
-            
+
             <!-- Right Sidebar -->
             <div class="game-sidebar right-sidebar glass-card">
                 <div class="board-controls">
@@ -302,7 +309,7 @@
                         <button class="theme-btn" data-theme="neon">Neon</button>
                     </div>
                 </div>
-                
+
                 <div class="position-info">
                     <h3 class="sidebar-title">Position</h3>
                     <div class="fen-display">
@@ -311,7 +318,7 @@
                         <button class="copy-fen-btn" id="copyFEN">Copy FEN</button>
                     </div>
                 </div>
-                
+
                 <div class="game-status">
                     <h3 class="sidebar-title">Status</h3>
                     <div class="status-box" id="gameStatus">
@@ -322,7 +329,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Game Over Modal -->
     <div id="gameOverModal" class="modal">
         <div class="modal-content glass-card">
@@ -340,7 +347,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- About Modal -->
     <div id="aboutModal" class="modal">
         <div class="modal-content glass-card">
@@ -362,9 +369,10 @@
             </div>
         </div>
     </div>
-    
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/1.0.0-beta.6/chess.min.js"></script>
-    <script src="game.js"></script>
+    <script src="game.js?v=2"></script>
 </body>
+
 </html>
