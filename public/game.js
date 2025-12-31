@@ -1,11 +1,41 @@
 // Chess client-side logic
 const socket = io();
 
-// Unicode chess pieces
-const PIECES = {
-    'K': '♔', 'Q': '♕', 'R': '♖', 'B': '♗', 'N': '♘', 'P': '♙',
-    'k': '♚', 'q': '♛', 'r': '♜', 'b': '♝', 'n': '♞', 'p': '♟'
-};
+// Piece Themes (SVG URLs)
+// Piece Themes (Local Custom PNGs)
+function getPieceImage(type, color) {
+    // We now have custom images for ALL pieces!
+    const fileName = (color === 'w' ? 'w' : 'b') + type.toUpperCase() + '.png';
+    return fileName;
+}
+
+// Sound Effects System (Web Audio API - No downloads needed!)
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function playSound(type) {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    if (type === 'move') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime + 0.1);
+        gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.1);
+    } else if (type === 'capture') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(1200, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.15);
+        gainNode.gain.setValueAtTime(0.4, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.15);
+    }
+}
 
 // Game state
 let currentGame = null;
@@ -296,13 +326,13 @@ function renderBoard() {
             squareDiv.dataset.square = squareName;
 
             if (square) {
-                const piece = document.createElement('span');
-                piece.className = 'piece';
-                piece.textContent = PIECES[square.type.toUpperCase()] ||
-                    PIECES[square.type.toLowerCase()];
-                piece.dataset.piece = square.type;
-                piece.dataset.color = square.color;
-                squareDiv.appendChild(piece);
+                const pieceImg = document.createElement('img');
+                pieceImg.className = 'piece';
+                pieceImg.src = getPieceImage(square.type, square.color);
+                pieceImg.draggable = false;
+                // Add pop animation
+                pieceImg.style.animation = 'popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                squareDiv.appendChild(pieceImg);
             }
 
             squareDiv.addEventListener('click', () => handleSquareClick(squareName));
@@ -390,6 +420,9 @@ function attemptMove(from, to) {
     socket.emit('makeMove', { gameId: currentGame, move }, (response) => {
         if (response.success) {
             // Move accepted
+            const isCapture = chessGame.get(move.to) !== null;
+            playSound(isCapture ? 'capture' : 'move');
+
             chessGame.move(move);
             renderBoard();
             updateMoveHistory();
@@ -406,6 +439,10 @@ function attemptMove(from, to) {
 
 // ===== MOVE HANDLING =====
 socket.on('moveMade', (data) => {
+    // Check for capture before moving for sound
+    const isCapture = chessGame.get(data.move.to) !== null || (data.move.flags && data.move.flags.includes('e')); // 'e' is en passant
+    playSound(isCapture ? 'capture' : 'move');
+
     chessGame.move(data.move);
     renderBoard();
     updateMoveHistory();
