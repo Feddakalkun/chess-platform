@@ -17,9 +17,11 @@
     --glass-shine: rgba(255, 255, 255, 0.05);
     --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
 
-    /* Board Colors (Translucent - VISIBLE) */
-    --board-light: rgba(255, 255, 255, 0.6);
-    --board-dark: rgba(0, 0, 0, 0.5);
+    /* Board Colors (HIGH VISIBILITY) */
+    --board-light: rgba(240, 240, 240, 0.85);
+    /* Almost solid bright */
+    --board-dark: rgba(70, 80, 100, 0.65);
+    /* Visible blue-grey */
 
     --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --radius-lg: 12px;
