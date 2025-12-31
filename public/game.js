@@ -1,5 +1,12 @@
 // Chess client-side logic
-const socket = io();
+const BACKEND_URL = window.location.hostname === 'localhost'
+    ? 'http://localhost:3001'
+    : 'https://chess-platform-rpew.onrender.com';
+
+const socket = io(BACKEND_URL, {
+    transports: ['websocket', 'polling'],
+    withCredentials: true
+});
 
 // Piece Themes (SVG URLs)
 // Piece Themes (Local Custom PNGs)
