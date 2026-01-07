@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeddaKalkun Platform - 18+</title>
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #f0f0f0;
+            --accent-red: #ff3333;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            /* Hacker/Terminal vibe */
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-image: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 3rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+            animation: fadeIn 1s ease-out;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: var(--accent-red);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 0 0 20px rgba(255, 51, 51, 0.4);
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            font-weight: normal;
+        }
+
+        .disclaimer-box {
+            border: 1px solid var(--accent-red);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            background: rgba(255, 51, 51, 0.1);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .legal-text {
+            color: #888;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .enter-btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: transparent;
+            color: var(--text-color);
+            border: 2px solid var(--text-color);
+            font-family: inherit;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .enter-btn:hover {
+            background: var(--text-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>WARNING: 18+</h1>
+        <h2>FeddaKalkun Platform</h2>
+
+        <div class="disclaimer-box">
+            <p><strong>DISCLAIMER:</strong></p>
+            <p>This site contains adult content and unrestricted experiences.</p>
+            <br>
+            <p>By entering, you confirm you are 18 years of age or older.</p>
+            <p class="legal-text">The FeddaKalkun Company is NOT responsible for anything found herein. Enter at your
+                own risk.</p>
+        </div>
+
+        <a href="index.html" class="enter-btn">I AGREE - ENTER</a>
+    </div>
+
+</body>
+
+</html>
